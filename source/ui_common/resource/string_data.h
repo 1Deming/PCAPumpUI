@@ -185,7 +185,29 @@ typedef enum
 	kStrPrecesionFactorSet,
 	kStrUserDataError,
 	kStrUserDataCleared,
-	DYNAMIC_STRING_ID_DEFINE,
+
+	//add by deming, 2020/05/28
+	kStrpresscanclekey,   	//否按返回键
+	kStrpressselectkey,		//是按确认键
+	kStrstartedit,  		//进入编辑
+	kStredit,				//编辑
+	kStrBKGDUI,				//速度:%4.1f mL/hr 总量:%3d mL\nKVO速度:%3d mL/hr
+	kStrrate,				//速度
+	kStrvolume,				//总量
+	kStrPCAUI,  			//PCA首次量/常规量/间隔时间\n小时允许数:%4.1f mL/\n%4.1f mL/%3d min/%3d次
+	kStrPCAfirstdose,		//PCA首次量
+	kStrregulardose,  		//常规量
+	kStrinternaltime,		//间隔时间
+	kStrallowperhour,  		//小时允许数
+	kStrAutoCycleUI,   		//速度:%4.1f mL/hr 生效时长:%2.1f hr\n工作时间/休息时间:%2.1f/%2.1f hr
+	kStreffectivetime,  	//生效时长
+	kStrworktime,  			//工作时间
+	kStrbreaktime,  		//休息时间
+	kStrConcentrationSet,  	//浓度设置
+	
+
+
+	DYNAMIC_STRING_ID_DEFINE,	
 	kStrIDMax
 }StrID;
 

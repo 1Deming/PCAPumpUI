@@ -12,7 +12,7 @@
         <ByteLimit>50</ByteLimit>
     </Stack>
     <DebugChecksum>
-        <Checksum>3099930519</Checksum>
+        <Checksum>1906045831</Checksum>
     </DebugChecksum>
     <StLinkDriver>
         <stlinkserialNo>58391543</stlinkserialNo>
@@ -234,8 +234,11 @@
         <mode>0</mode>
     </DisassembleMode>
     <Breakpoints2>
-        <Bp0>_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\source\app\screens\app_scr_init_screen.c}.60.2" 0 0 1 "" 0 "" 0</Bp0>
-        <Count>1</Count>
+        <Bp0>_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\source\app\screens\app_scr_init_screen.c}.60.2" 0 0 1 "" 0 "" 0</Bp0>
+        <Bp1>_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\source\app\app_route.cpp}.229.2" 0 0 1 "" 0 "" 0</Bp1>
+        <Bp2>_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\source\app\screens\app_scr_class8.c}.137.85" 0 0 1 "" 0 "" 0</Bp2>
+        <Bp3>_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\source\app\screens\app_scr_class8.c}.112.4" 0 0 1 "" 0 "" 0</Bp3>
+        <Count>4</Count>
     </Breakpoints2>
     <Aliases>
         <A0>_ "F:\zt_1.0\master\bsp\bsp_machine\Drivers\STM32L1xx_HAL_Driver\Src\stm32l1xx_hal.c" ""</A0>

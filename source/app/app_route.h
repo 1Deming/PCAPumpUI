@@ -20,16 +20,14 @@
 extern "C" {
 #endif
 
-
-
 typedef WM_HWIN (*ScreenCreateFunc)(type_MsgBody4UICtrlMsg *);
 typedef int (*ScreenUpdateFunc)(WM_HWIN , type_MsgBody4UICtrlMsg *);
 typedef void (*ScrennDestroyFunc)(WM_HWIN);
 
 
-
 //Screen information: id、creatfun、updatefun、destroyfun
 typedef struct {
+	uint8_t uiclass_id;
 	uint8_t screen_id[5];
 	ScreenCreateFunc create_func;
 	ScreenUpdateFunc update_fun;

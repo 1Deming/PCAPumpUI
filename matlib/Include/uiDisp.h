@@ -62,6 +62,7 @@ typedef struct _SItemDescriptor
 
 
 typedef struct {
+  uint8_T ClassID;
   uint8_T UIID[5];
   sItemDescriptor SItem;
   dItemDescriptor ditem;

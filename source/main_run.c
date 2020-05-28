@@ -135,7 +135,7 @@ void wm_bk_callback(WM_MESSAGE *pMsg)
 }
 
 
-uint8_t index ,screenID;
+uint8_t index ,screenID,classID;
 void test(void)
 {
 	type_MsgBody4UICtrlMsg disp_msg;
@@ -144,16 +144,17 @@ void test(void)
 	sptr = (const ScreenInfo *)&g_scr_routes[0];
 	memcpy(disp_msg.UIID, sptr->screen_id, 5);
 
-    index = (index +1)%13;
+      index = (index +1)%2;
        
-    disp_msg.SItem.DataValArray[1] = index;
+        disp_msg.SItem.DataValArray[1] = index;
 	disp_msg.ditem.DataValArray[1] = 3;
 	disp_msg.ditem.DataValArray[2] = 4;
 	disp_msg.ditem.DataValArray[3] = 5;
 //	disp_msg.SItem.DataValArray[7] = 50;
 //	disp_msg.SItem.DataValArray[8] = 120;
 
-	ert_uiDispService(0,disp_msg.UIID, &disp_msg.CursorIndex, &disp_msg.ditem, &disp_msg.SItem);
+        classID = (classID +1)%4;
+	ert_uiDispService(8,disp_msg.UIID, &disp_msg.CursorIndex, &disp_msg.ditem, &disp_msg.SItem);
 }
 
 /***********************************************

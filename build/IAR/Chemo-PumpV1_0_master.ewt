@@ -4235,6 +4235,30 @@
                     <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_check_12500.h</name>
                 </file>
                 <file>
+                    <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class1.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class1.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class2.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class2.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class3.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class3.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class8.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class8.h</name>
+                </file>
+                <file>
                     <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_error_22000.c</name>
                 </file>
                 <file>

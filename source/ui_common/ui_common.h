@@ -36,6 +36,7 @@ typedef struct
 	uint8_t cur_cursor; 
 	uint8_t opcode;
 	uint8_t uiid[5];
+	uint8_t classid;        
 	uint8_t flag_upate_once;
 	WM_HWIN child_id[UD_CHILD_MAX];
 }UI_ScreenCommon;
