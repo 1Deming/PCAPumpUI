@@ -1,0 +1,82 @@
+app_scr_home_02000.pbi: \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\source\app\screens\app_scr_home_02000.c \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc\DIALOG.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/WM.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/GUI_ConfDefaults.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\Config\GUIConf.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/GUI_Type.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/LCD.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/Global.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/WM_GUI.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/GUI.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\stddef.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\ycheck.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\yvals.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\DLib_Defaults.h \
+  C:\\Program\ Files\ (x86)\\IAR\ Systems\\Embedded\ Workbench\ 8.3\\arm\\inc\\c\\DLib_Config_Normal.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\DLib_Product.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\ysizet.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/GUI_Version.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/BUTTON.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/DIALOG_Intern.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/WIDGET.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/WM_Intern.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/GUI_Private.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/LCD_Protected.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/GUI_Debug.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/SCROLLBAR.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/CALENDAR.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/CHECKBOX.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/CHOOSECOLOR.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/CHOOSEFILE.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/DROPDOWN.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/LISTBOX.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/EDIT.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/FRAMEWIN.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/GRAPH.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/HEADER.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/ICONVIEW.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/IMAGE.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/LISTVIEW.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/LISTWHEEL.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/MENU.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/MULTIEDIT.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/MULTIPAGE.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/DIALOG.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/PROGBAR.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/RADIO.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/SLIDER.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/SPINBOX.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/SWIPELIST.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/TEXT.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/TREEVIEW.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc/KNOB.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc\GUI.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\source\ui_common\ui_common.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\ssz_micro_sys\include\ssz_def.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\stdint.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\stdbool.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\emwin\inc\WM.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\ssz_ui\include\ui_utility.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\ssz_ui\include/ui.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\config\ssz_ui_config.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\source\ui_common\resource\image_data.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\source\ui_common\resource\string_data.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\ssz_micro_sys\include\ssz_locale.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\ssz_micro_sys\include/ssz_def.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\source\ui_common\resource\font_data.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\ssz_ui\include\ui.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\source\app\screens/app_scr_home_02000.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\matlib\Include\uiDisp.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\matlib\rtwtypes.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\stdio.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\ssz_micro_sys\include\ssz_common.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\string.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\DLib_Product_string.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\assert.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\ssz_micro_sys\include/ssz_tick_time.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\config\ssz_config.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\source\ui_common\widget\widget_text.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\stdlib.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\DLib_Product_stdlib.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\source\ui_common\widget\widget_image.h
