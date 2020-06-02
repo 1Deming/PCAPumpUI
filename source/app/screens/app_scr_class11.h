@@ -15,9 +15,9 @@ extern "C" {
 #endif
 
 
-WM_HWIN app_scr_class8_create(type_MsgBody4UICtrlMsg *msg); 
-int app_scr_class8_update(WM_HWIN hwin, type_MsgBody4UICtrlMsg *msg);
-void app_scr_class8_destroy(WM_HWIN win_id);
+WM_HWIN app_scr_class11_create(type_MsgBody4UICtrlMsg *msg); 
+int app_scr_class11_update(WM_HWIN hwin, type_MsgBody4UICtrlMsg *msg);
+void app_scr_class11_destroy(WM_HWIN win_id);
 
 
 

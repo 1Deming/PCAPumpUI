@@ -140,21 +140,49 @@ void test(void)
 {
 	type_MsgBody4UICtrlMsg disp_msg;
 	const ScreenInfo *sptr;
-    screenID = (screenID+1)%13;
+        screenID = (screenID+1)%13;
 	sptr = (const ScreenInfo *)&g_scr_routes[0];
 	memcpy(disp_msg.UIID, sptr->screen_id, 5);
 
-      index = (index +1)%2;
+        index = (index +1)%3;
        
-        disp_msg.SItem.DataValArray[1] = index;
-	disp_msg.ditem.DataValArray[1] = 3;
-	disp_msg.ditem.DataValArray[2] = 4;
-	disp_msg.ditem.DataValArray[3] = 5;
+        disp_msg.SItem.DataValArray[1] = index;      
+        disp_msg.SItem.DataValArray[2] = index;
+        disp_msg.SItem.DataValArray[3] = index;
+        disp_msg.SItem.DataValArray[4] = index;
+        
+        disp_msg.ditem.DataValArray[1] = index;
+	disp_msg.ditem.DataValArray[2] = index;
+	disp_msg.ditem.DataValArray[3] = index;      
+        disp_msg.ditem.DataValArray[4] = index;
+	disp_msg.ditem.DataValArray[5] = index;
+        
+        disp_msg.CursorIndex.CursorType = index;
+
+
+
+        disp_msg.SItem.DataValArray[5] = index;
+        disp_msg.SItem.DataValArray[6] = index;
+        disp_msg.SItem.DataValArray[7] = index;
+        disp_msg.SItem.DataValArray[8] = index;
+        disp_msg.SItem.DataValArray[9] = index;
+        disp_msg.SItem.DataValArray[10] = index;
+        disp_msg.SItem.DataValArray[11] = index;
+        disp_msg.SItem.DataValArray[12] = index;
+        disp_msg.SItem.DataValArray[13] = index;
+        disp_msg.SItem.DataValArray[14] = index;
+        disp_msg.SItem.DataValArray[15] = index;
+        disp_msg.SItem.DataValArray[16] = index;
+        disp_msg.SItem.DataValArray[21] = index;
+
+        disp_msg.ditem.DataValArray[1] = index;
+	disp_msg.ditem.DataValArray[2] = index;
+	disp_msg.ditem.DataValArray[3] = index;
+        disp_msg.CursorIndex.CursorIndex = index;
 //	disp_msg.SItem.DataValArray[7] = 50;
 //	disp_msg.SItem.DataValArray[8] = 120;
 
-        classID = (classID +1)%4;
-	ert_uiDispService(8,disp_msg.UIID, &disp_msg.CursorIndex, &disp_msg.ditem, &disp_msg.SItem);
+	ert_uiDispService(20,disp_msg.UIID, &disp_msg.CursorIndex, &disp_msg.ditem, &disp_msg.SItem);
 }
 
 /***********************************************

@@ -57,20 +57,34 @@ static int g_home_left_time;
 *
 ***********************************************************************/
 
-static void put_message(uint8_t infusion_speed)
+static void put_message(double rate , double volume ,  double KVO_rate,uint8_t unit)
 {
-//	char *p;
-//	p = get_dynamic_string(kStrDynamic3);
-//	sprintf(p, "%d", infusion_speed);	
-//	strcat(p, "ml/hr");
-//	TEXT_SetText(WM_GetDialogItem(g_ui_common_param.win_id, INFUSION_ID_STR_SPEED), p);
-//
-//	hWin = WM_GetDialogItem(ui_get_current_hwin(), MessageID);
-//	//sprintf(buff, "%s", get_string(kStrWhetherToStopInfuse));
-//	sprintf(p, "%d", infusion_speed);	
-//	TEXT_SetText(hWin, get_string(kStrWhetherToContinueInfuse));		
-
-
+	char *p;
+        const char *ptr;
+        WM_HWIN hWin;
+        
+        hWin = WM_GetDialogItem(ui_get_current_hwin(), MessageID);
+		if(unit == 0)
+		{
+			ptr = get_string(kStrBKGDUI_mL);
+		}
+		else if(unit == 1)
+		{
+			ptr = get_string(kStrBKGDUI_mg);
+		}
+		else if(unit == 2)
+		{
+			ptr = get_string(kStrBKGDUI_mcg);
+		}
+		else   //默认为mL
+			{
+			ptr = get_string(kStrBKGDUI_mL);
+			}
+		
+        p = get_dynamic_string(kStrDynamic3);
+        sprintf(p, ptr, rate,volume,KVO_rate);
+      
+        TEXT_SetText(hWin, p);     
 }
 
 static void _cbDialog(WM_MESSAGE * pMsg)
@@ -92,13 +106,13 @@ static void _cbDialog(WM_MESSAGE * pMsg)
 			WINDOW_SetBkColor(pMsg->hWin, GUI_BLACK);
 
 			GUI_SetFont(get_font(14));
-			ptr = get_string(kStrBKGDUI);
-			strlen = GUI_GetStringDistX(ptr);
+			//ptr = get_string(kStrBKGDUI);
+                        //p = get_dynamic_string(kStrDynamic3);
+			//strlen = sprintf(p, ptr, 10000.1,223,486);
                         
-			sprintf(p, ptr, 10000.1,223,486);
                         
-			hWin = TEXT_CreateEx(40, 7, 200, 40, pMsg->hWin, 
-				                 WM_CF_SHOW, GUI_TA_VCENTER|GUI_TA_HCENTER, MessageID, p);
+			hWin = TEXT_CreateEx(0, 7, 255, 40, pMsg->hWin, 
+				                 WM_CF_SHOW, GUI_TA_VCENTER|GUI_TA_HCENTER, MessageID, 0);
 			TEXT_SetFont(hWin, get_font(14));
 			TEXT_SetBkColor(hWin,GUI_BLACK );
 			TEXT_SetTextColor(hWin, GUI_WHITE);
@@ -149,6 +163,31 @@ int app_scr_class8_update(WM_HWIN hwin, type_MsgBody4UICtrlMsg *msg)
 	//put_infusion_state(msg->SItem.DataValArray[5]);
 	//put_infusion_dose(msg->SItem.DataValArray[6], msg->SItem.DataValArray[7]);
 	//put_infusion_seed(msg->SItem.DataValArray[8]);
+
+	double rate ;
+	double volume ;
+	double KVO_rate;
+
+	rate = 	msg->SItem.DataValArray[1]*1000 	+
+			msg->SItem.DataValArray[2]*100 		+
+			msg->SItem.DataValArray[3]*10 		+
+			msg->SItem.DataValArray[4]			+
+			msg->SItem.DataValArray[5]*0.1		;
+
+	volume= msg->SItem.DataValArray[6]*1000 	+
+			msg->SItem.DataValArray[7]*100 		+
+			msg->SItem.DataValArray[8]*10 		+
+			msg->SItem.DataValArray[9]			+
+			msg->SItem.DataValArray[10]*0.1		;
+
+	KVO_rate= msg->SItem.DataValArray[11]*1000 	+
+			msg->SItem.DataValArray[12]*100 	+
+			msg->SItem.DataValArray[13]*10		+
+			msg->SItem.DataValArray[14]			+
+			msg->SItem.DataValArray[15]*0.1		;
+
+	put_message(rate,volume,KVO_rate,msg->SItem.DataValArray[16]);
+	
  	return 0;	
 }
 

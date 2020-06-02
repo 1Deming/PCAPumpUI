@@ -66,13 +66,13 @@ static void put_select_stop_infusion(bool is_stop)
 	WM_HWIN hWin;
     const char *ptr;
         
-	if(is_stop == 1)
+	if(is_stop == 0)
 	{
             hWin = WM_GetDialogItem(ui_get_current_hwin(), MessageID);
             //sprintf(buff, "%s", get_string(kStrWhetherToStopInfuse));
             TEXT_SetText(hWin, get_string(kStrWhetherToContinueInfuse));		
 	}
-	else if(is_stop == 0)
+	else if(is_stop == 1)
 	{
             hWin = WM_GetDialogItem(ui_get_current_hwin(), MessageID);
             //sprintf(buff, "%s", get_string(kStrInfusionEnd));

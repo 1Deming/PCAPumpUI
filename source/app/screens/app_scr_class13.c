@@ -24,7 +24,7 @@
 #include "string_data.h"
 #include "font_data.h"
 #include <stdbool.h>
-#include "app_scr_class8.h"
+#include "app_scr_class13.h"
 #include <stdio.h>
 #include "ssz_common.h"
 #include "widget_text.h"
@@ -47,7 +47,7 @@
 *
 ***********************************************************************/
 static const GUI_WIDGET_CREATE_INFO _aDialogCreate[] = {
-  {WINDOW_CreateIndirect, "app_scr_class8", ID_WINDOW_0, 0, 0, 256, 64, 0, 0x0, 0},
+  {WINDOW_CreateIndirect, "app_scr_class13", ID_WINDOW_0, 0, 0, 256, 64, 0, 0x0, 0},
   
 };
 static int g_home_left_time;
@@ -57,20 +57,19 @@ static int g_home_left_time;
 *
 ***********************************************************************/
 
-static void put_message(uint8_t infusion_speed)
+static void put_message(double rate , float effectivetime ,  float worktime,float breaktime)
 {
-//	char *p;
-//	p = get_dynamic_string(kStrDynamic3);
-//	sprintf(p, "%d", infusion_speed);	
-//	strcat(p, "ml/hr");
-//	TEXT_SetText(WM_GetDialogItem(g_ui_common_param.win_id, INFUSION_ID_STR_SPEED), p);
-//
-//	hWin = WM_GetDialogItem(ui_get_current_hwin(), MessageID);
-//	//sprintf(buff, "%s", get_string(kStrWhetherToStopInfuse));
-//	sprintf(p, "%d", infusion_speed);	
-//	TEXT_SetText(hWin, get_string(kStrWhetherToContinueInfuse));		
-
-
+	char *p;
+        const char *ptr;
+        WM_HWIN hWin;
+        
+        hWin = WM_GetDialogItem(ui_get_current_hwin(), MessageID);
+		ptr = get_string(kStrAutoCycleUI);
+		
+        p = get_dynamic_string(kStrDynamic3);
+        sprintf(p, ptr, rate,effectivetime,worktime,breaktime);
+      
+        TEXT_SetText(hWin, p);     
 }
 
 static void _cbDialog(WM_MESSAGE * pMsg)
@@ -91,14 +90,10 @@ static void _cbDialog(WM_MESSAGE * pMsg)
 		case WM_INIT_DIALOG:
 			WINDOW_SetBkColor(pMsg->hWin, GUI_BLACK);
 
-			GUI_SetFont(get_font(14));
-			ptr = get_string(kStrBKGDUI);
-			strlen = GUI_GetStringDistX(ptr);
+			GUI_SetFont(get_font(14));     
                         
-			sprintf(p, ptr, 10000.1,223,486);
-                        
-			hWin = TEXT_CreateEx(40, 7, 200, 40, pMsg->hWin, 
-				                 WM_CF_SHOW, GUI_TA_VCENTER|GUI_TA_HCENTER, MessageID, p);
+			hWin = TEXT_CreateEx(0, 7, 255, 40, pMsg->hWin, 
+				                 WM_CF_SHOW, GUI_TA_VCENTER|GUI_TA_HCENTER, MessageID, 0);
 			TEXT_SetFont(hWin, get_font(14));
 			TEXT_SetBkColor(hWin,GUI_BLACK );
 			TEXT_SetTextColor(hWin, GUI_WHITE);
@@ -133,7 +128,7 @@ static void _cbDialog(WM_MESSAGE * pMsg)
 *       Public code
 *
 ***********************************************************************/
-WM_HWIN app_scr_class8_create(type_MsgBody4UICtrlMsg *msg) 
+WM_HWIN app_scr_class13_create(type_MsgBody4UICtrlMsg *msg) 
 {
 	WM_HWIN hWin;
 
@@ -143,16 +138,37 @@ WM_HWIN app_scr_class8_create(type_MsgBody4UICtrlMsg *msg)
 }
 
 
-int app_scr_class8_update(WM_HWIN hwin, type_MsgBody4UICtrlMsg *msg)
+int app_scr_class13_update(WM_HWIN hwin, type_MsgBody4UICtrlMsg *msg)
 {
-	//g_home_left_time = msg->SItem.DataValArray[4];
-	//put_infusion_state(msg->SItem.DataValArray[5]);
-	//put_infusion_dose(msg->SItem.DataValArray[6], msg->SItem.DataValArray[7]);
-	//put_infusion_seed(msg->SItem.DataValArray[8]);
+	double rate ;
+	float effectivetime ;
+	float worktime;
+	float breaktime;
+
+	rate = 	msg->SItem.DataValArray[1]*1000 	+
+			msg->SItem.DataValArray[2]*100 		+
+			msg->SItem.DataValArray[3]*10 		+
+			msg->SItem.DataValArray[4]			+
+			msg->SItem.DataValArray[5]*0.1		;
+
+	effectivetime =msg->SItem.DataValArray[6]*10 		+
+			msg->SItem.DataValArray[7]			+
+			msg->SItem.DataValArray[8]*0.1		;
+
+	worktime =msg->SItem.DataValArray[9]*10 		+
+			msg->SItem.DataValArray[10]			+
+			msg->SItem.DataValArray[11]*0.1		;
+
+	breaktime =msg->SItem.DataValArray[12]*10 		+
+			msg->SItem.DataValArray[13]			+
+			msg->SItem.DataValArray[14]*0.1		;
+
+	put_message(rate,effectivetime,worktime,breaktime);
+	
  	return 0;	
 }
 
-void app_scr_class8_destroy(WM_HWIN win_id) 
+void app_scr_class13_destroy(WM_HWIN win_id) 
 {
 	GUI_EndDialog(win_id, 0);
 }

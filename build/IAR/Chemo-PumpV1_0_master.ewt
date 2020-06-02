@@ -4223,22 +4223,40 @@
             <group>
                 <name>screens</name>
                 <file>
-                    <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_alarm_21000.c</name>
-                </file>
-                <file>
-                    <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_alarm_21000.h</name>
-                </file>
-                <file>
-                    <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_check_12500.c</name>
-                </file>
-                <file>
-                    <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_check_12500.h</name>
-                </file>
-                <file>
                     <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class1.c</name>
                 </file>
                 <file>
                     <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class1.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class10.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class10.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class11.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class11.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class12.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class12.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class13.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class13.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class18.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class18.h</name>
                 </file>
                 <file>
                     <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class2.c</name>
@@ -4247,16 +4265,46 @@
                     <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class2.h</name>
                 </file>
                 <file>
+                    <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class20.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class20.h</name>
+                </file>
+                <file>
                     <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class3.c</name>
                 </file>
                 <file>
                     <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class3.h</name>
                 </file>
                 <file>
+                    <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class4.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class4.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class5.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class5.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class6.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class6.h</name>
+                </file>
+                <file>
                     <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class8.c</name>
                 </file>
                 <file>
                     <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class8.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class9.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_class9.h</name>
                 </file>
                 <file>
                     <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_error_22000.c</name>
@@ -4413,12 +4461,6 @@
                 </file>
                 <file>
                     <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_test_plus_offset.h</name>
-                </file>
-                <file>
-                    <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_unlock_password_12100.c</name>
-                </file>
-                <file>
-                    <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_unlock_password_12100.h</name>
                 </file>
                 <file>
                     <name>$PROJ_DIR$\..\..\source\app\screens\app_scr_version_14140.c</name>
@@ -4742,18 +4784,6 @@
                     </file>
                     <file>
                         <name>$PROJ_DIR$\..\..\resource\image\battery_two.c</name>
-                    </file>
-                    <file>
-                        <name>$PROJ_DIR$\..\..\resource\image\BKGD.c</name>
-                    </file>
-                    <file>
-                        <name>$PROJ_DIR$\..\..\resource\image\BKGD_KVORate.c</name>
-                    </file>
-                    <file>
-                        <name>$PROJ_DIR$\..\..\resource\image\BKGD_Rate.c</name>
-                    </file>
-                    <file>
-                        <name>$PROJ_DIR$\..\..\resource\image\BKGD_VOL.c</name>
                     </file>
                     <file>
                         <name>$PROJ_DIR$\..\..\resource\image\error.c</name>

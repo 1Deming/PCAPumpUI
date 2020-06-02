@@ -63,4 +63,9 @@ app_scr_class1.pbi: \
   D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\ssz_ui\include\ui_utility.h \
   D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\ssz_ui\include/ui.h \
   D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\config\ssz_ui_config.h \
-  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\source\ui_common\resource\image_data.h
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\source\ui_common\resource\image_data.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\source\ui_common\resource\string_data.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\ssz_micro_sys\include\ssz_locale.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\ssz_micro_sys\include/ssz_def.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\source\ui_common\resource\font_data.h \
+  D:\1-WORK\ProjectFiles\PCA_Pump\code\master-new\build\IAR\..\..\lib\ssz_ui\include\ui.h

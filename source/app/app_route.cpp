@@ -44,8 +44,18 @@
 #include "app_scr_class1.h"
 #include "app_scr_class2.h"
 #include "app_scr_class3.h"
-#include "app_scr_class8.h"
+#include "app_scr_class4.h"
+#include "app_scr_class5.h"
+#include "app_scr_class6.h"
 
+#include "app_scr_class8.h"
+#include "app_scr_class9.h"
+#include "app_scr_class10.h"
+#include "app_scr_class11.h"
+#include "app_scr_class12.h"
+#include "app_scr_class13.h"
+#include "app_scr_class18.h"
+#include "app_scr_class20.h"
 
 /************************************************
  * Declaration
@@ -92,23 +102,23 @@ const ScreenInfo g_scr_routes[SCREEN_NUMBER_TOTAL]= {
 	{
 		.uiclass_id 	= 4,
 		.screen_id 		= {},
-		.create_func 	= NULL,
-		.update_fun 	= NULL,
-		.destroy_fun 	= NULL,
+		.create_func 	= app_scr_class4_create,
+		.update_fun 	= app_scr_class4_update,
+		.destroy_fun 	= app_scr_class4_destroy,
 	},
 	{
 		.uiclass_id 	= 5,
-		.screen_id 		= {},
-		.create_func 	= NULL,
-		.update_fun 	= NULL,
-		.destroy_fun 	= NULL,
+		.screen_id 	= {},
+		.create_func 	= app_scr_class5_create,
+		.update_fun 	= app_scr_class5_update,
+		.destroy_fun 	= app_scr_class5_destroy,
 	},
 	{
 		.uiclass_id 	= 6,
 		.screen_id 		= {},
-		.create_func 	= NULL,
-		.update_fun 	= NULL,
-		.destroy_fun 	= NULL,
+		.create_func 	= app_scr_class6_create,
+		.update_fun 	= app_scr_class6_update,
+		.destroy_fun 	= app_scr_class6_destroy,
 	},
 	{
 		.uiclass_id 	= 7,
@@ -127,37 +137,37 @@ const ScreenInfo g_scr_routes[SCREEN_NUMBER_TOTAL]= {
 	{
 		.uiclass_id 	= 9,
 		.screen_id 		= {},
-		.create_func 	= NULL,
-		.update_fun 	= NULL,
-		.destroy_fun 	= NULL,
+		.create_func 	= app_scr_class9_create,
+		.update_fun 	= app_scr_class9_update,
+		.destroy_fun 	= app_scr_class9_destroy,
 	},
 	{
 		.uiclass_id 	= 10,
 		.screen_id 		= {},
-		.create_func 	= NULL,
-		.update_fun 	= NULL,
-		.destroy_fun 	= NULL,
+		.create_func 	= app_scr_class10_create,
+		.update_fun 	= app_scr_class10_update,
+		.destroy_fun 	= app_scr_class10_destroy,
 	},
 	{
 		.uiclass_id 	= 11,
 		.screen_id 		= {},
-		.create_func 	= NULL,
-		.update_fun 	= NULL,
-		.destroy_fun 	= NULL,
+		.create_func 	= app_scr_class11_create,
+		.update_fun 	= app_scr_class11_update,
+		.destroy_fun 	= app_scr_class11_destroy,
 	},
 	{
 		.uiclass_id 	= 12,
 		.screen_id 		= {},
-		.create_func 	= NULL,
-		.update_fun 	= NULL,
-		.destroy_fun 	= NULL,
+		.create_func 	= app_scr_class12_create,
+		.update_fun 	= app_scr_class12_update,
+		.destroy_fun 	= app_scr_class12_destroy,
 	},
 	{
 		.uiclass_id 	= 13,
 		.screen_id 		= {},
-		.create_func 	= NULL,
-		.update_fun 	= NULL,
-		.destroy_fun 	= NULL,
+		.create_func 	= app_scr_class13_create,
+		.update_fun 	= app_scr_class13_update,
+		.destroy_fun 	= app_scr_class13_destroy,
 	},
 	{
 		.uiclass_id 	= 14,
@@ -190,9 +200,9 @@ const ScreenInfo g_scr_routes[SCREEN_NUMBER_TOTAL]= {
 	{
 		.uiclass_id 	= 18,
 		.screen_id 		= {},
-		.create_func 	= NULL,
-		.update_fun 	= NULL,
-		.destroy_fun 	= NULL,
+		.create_func 	= app_scr_class18_create,
+		.update_fun 	= app_scr_class18_update,
+		.destroy_fun 	= app_scr_class18_destroy,
 	},
 	{
 		.uiclass_id 	= 19,
@@ -204,9 +214,9 @@ const ScreenInfo g_scr_routes[SCREEN_NUMBER_TOTAL]= {
 	{
 		.uiclass_id 	= 20,
 		.screen_id 		= {},
-		.create_func 	= NULL,
-		.update_fun 	= NULL,
-		.destroy_fun 	= NULL,
+		.create_func 	= app_scr_class20_create,
+		.update_fun 	= app_scr_class20_update,
+		.destroy_fun 	= app_scr_class20_destroy,
 	},
          
       

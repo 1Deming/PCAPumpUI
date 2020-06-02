@@ -24,7 +24,7 @@
 #include "string_data.h"
 #include "font_data.h"
 #include <stdbool.h>
-#include "app_scr_class9.h"
+#include "app_scr_class11.h"
 #include <stdio.h>
 #include "ssz_common.h"
 #include "widget_text.h"
@@ -49,7 +49,7 @@
 *
 ***********************************************************************/
 static const GUI_WIDGET_CREATE_INFO _aDialogCreate[] = {
-  {WINDOW_CreateIndirect, "app_scr_class8", ID_WINDOW_0, 0, 0, 256, 64, 0, 0x0, 0},
+  {WINDOW_CreateIndirect, "app_scr_class11", ID_WINDOW_0, 0, 0, 256, 64, 0, 0x0, 0},
   
 };
 static int g_home_left_time;
@@ -59,19 +59,64 @@ static int g_home_left_time;
 *
 ***********************************************************************/
 
-static void put_message(uint8_t infusion_speed)
-{
-//	char *p;
-//	p = get_dynamic_string(kStrDynamic3);
-//	sprintf(p, "%d", infusion_speed);	
-//	strcat(p, "ml/hr");
-//	TEXT_SetText(WM_GetDialogItem(g_ui_common_param.win_id, INFUSION_ID_STR_SPEED), p);
-//
-//	hWin = WM_GetDialogItem(ui_get_current_hwin(), MessageID);
-//	//sprintf(buff, "%s", get_string(kStrWhetherToStopInfuse));
-//	sprintf(p, "%d", infusion_speed);	
-//	TEXT_SetText(hWin, get_string(kStrWhetherToContinueInfuse));		
+static void put_message(uint8_t UIID , double data , uint8_t unit ,uint8_t seriesID ,uint8_t seriesIDall  ,uint8_t cursor)
+{		
+	char p[30];
+    const char *ptr;
+    WM_HWIN hWin;
+    
+    hWin = WM_GetDialogItem(ui_get_current_hwin(), MessageID1);
+	{
+		switch(UIID)
+			{
+				case 0:
+					TEXT_SetText(hWin, get_string(kStrvolume));		
+					break;
+				case 1:
+					TEXT_SetText(hWin, get_string(kStrPCAfirstdose));	
+					break;
+				case 2:
+					TEXT_SetText(hWin, get_string(kStrregulardose));	
+					break;
+				default:
+					
+					break;			
+			}
+    }
+			
+    hWin = WM_GetDialogItem(ui_get_current_hwin(), MessageID2);
+	sprintf(p, "%d/%d", seriesID,seriesIDall);	
+	TEXT_SetText(hWin, p);	
 
+
+    hWin = WM_GetDialogItem(ui_get_current_hwin(), MessageID3);
+    sprintf(p, "%4.1f", data);	
+    if(unit == 0)
+    {
+      strcat(p," mL");
+    }
+    else if(unit == 1)
+    {
+      strcat(p," mg");
+    }
+	else if(unit == 2)
+    {
+      strcat(p," mcg");
+    }
+        
+    if(cursor == 1)
+    {
+        TEXT_SetBkColor(hWin,GUI_WHITE);
+        TEXT_SetTextColor(hWin,GUI_BLACK);
+    }
+    else
+    {
+        TEXT_SetBkColor(hWin,GUI_BLACK);
+        TEXT_SetTextColor(hWin,GUI_WHITE);
+    }
+
+    TEXT_SetText(hWin, p);
+  
 
 }
 
@@ -94,10 +139,10 @@ static void _cbDialog(WM_MESSAGE * pMsg)
 			WINDOW_SetBkColor(pMsg->hWin, GUI_BLACK);
 
 			GUI_SetFont(get_font(14));
-			ptr = get_string(kStrBKGDUI);
+			ptr = get_string(kStrregulardose);
 			strlen = GUI_GetStringDistX(ptr);              
 			hWin = TEXT_CreateEx(6, 6, strlen, 14, pMsg->hWin, 
-				                 WM_CF_SHOW, GUI_TA_VCENTER|GUI_TA_HCENTER, MessageID1, p);
+				                 WM_CF_SHOW, GUI_TA_VCENTER|GUI_TA_HCENTER, MessageID1, 0);
 			TEXT_SetFont(hWin, get_font(14));
 			TEXT_SetBkColor(hWin,GUI_BLACK );
 			TEXT_SetTextColor(hWin, GUI_WHITE);
@@ -113,8 +158,8 @@ static void _cbDialog(WM_MESSAGE * pMsg)
 			WM_BringToTop(hWin);
 
 
-			strlen = GUI_GetStringDistX("1251.2mL");                                               
-			hWin = TEXT_CreateEx(89, 110, strlen, 14, pMsg->hWin, 
+			strlen = GUI_GetStringDistX("1251.2 mL/hr");                                               
+			hWin = TEXT_CreateEx(89, 25, strlen, 14, pMsg->hWin, 
 				                 WM_CF_SHOW, GUI_TA_VCENTER|GUI_TA_HCENTER, MessageID3, 0);
 			TEXT_SetFont(hWin, get_font(14));
 			TEXT_SetBkColor(hWin,GUI_BLACK );
@@ -129,14 +174,16 @@ static void _cbDialog(WM_MESSAGE * pMsg)
 				
 			ptr = get_string(kStrReturn);
 			strlen = GUI_GetStringDistX(ptr);
-			ui_rect_init_by_size(rect, 2, 46, strlen, 12);
+			ui_rect_init_by_size(rect, 2, 46, strlen, 14);
 			GUI_DispStringInRect(ptr, &rect, GUI_TA_LEFT|GUI_TA_VCENTER);
 
 			ptr = get_string(kStredit);
 			strlen = GUI_GetStringDistX(ptr);
-			ui_rect_init_by_size(rect, 220, 44, strlen, 16);
+			ui_rect_init_by_size(rect, 220, 46, strlen, 14);
 			GUI_DispStringInRect(ptr, &rect, GUI_TA_LEFT|GUI_TA_VCENTER);
-			
+			 
+                        
+                       
 			break; 
 		
 		default:
@@ -150,7 +197,7 @@ static void _cbDialog(WM_MESSAGE * pMsg)
 *       Public code
 *
 ***********************************************************************/
-WM_HWIN app_scr_class9_create(type_MsgBody4UICtrlMsg *msg) 
+WM_HWIN app_scr_class11_create(type_MsgBody4UICtrlMsg *msg) 
 {
 	WM_HWIN hWin;
 
@@ -160,16 +207,28 @@ WM_HWIN app_scr_class9_create(type_MsgBody4UICtrlMsg *msg)
 }
 
 
-int app_scr_class9_update(WM_HWIN hwin, type_MsgBody4UICtrlMsg *msg)
+int app_scr_class11_update(WM_HWIN hwin, type_MsgBody4UICtrlMsg *msg)
 {
-	//g_home_left_time = msg->SItem.DataValArray[4];
-	//put_infusion_state(msg->SItem.DataValArray[5]);
-	//put_infusion_dose(msg->SItem.DataValArray[6], msg->SItem.DataValArray[7]);
-	//put_infusion_seed(msg->SItem.DataValArray[8]);
+	double data ;
+	//static void put_message(uint8_t UIID , double data , uint8_t unit ,uint8_t seriesID ,uint8_t seriesIDall  ,uint8_t cursor)
+
+	data = 	msg->ditem.DataValArray[1]*1000 	+
+			msg->ditem.DataValArray[2]*100 		+
+			msg->ditem.DataValArray[3]*10 		+
+			msg->ditem.DataValArray[4]			+
+			msg->ditem.DataValArray[5]*0.1		;
+	
+	put_message(msg->SItem.DataValArray[1],
+				data,
+				msg->SItem.DataValArray[2],
+				msg->SItem.DataValArray[3],
+				msg->SItem.DataValArray[4],
+				msg->CursorIndex.CursorType);
+	
  	return 0;	
 }
 
-void app_scr_class9_destroy(WM_HWIN win_id) 
+void app_scr_class11_destroy(WM_HWIN win_id) 
 {
 	GUI_EndDialog(win_id, 0);
 }

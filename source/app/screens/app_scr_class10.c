@@ -24,7 +24,7 @@
 #include "string_data.h"
 #include "font_data.h"
 #include <stdbool.h>
-#include "app_scr_class8.h"
+#include "app_scr_class10.h"
 #include <stdio.h>
 #include "ssz_common.h"
 #include "widget_text.h"
@@ -47,7 +47,7 @@
 *
 ***********************************************************************/
 static const GUI_WIDGET_CREATE_INFO _aDialogCreate[] = {
-  {WINDOW_CreateIndirect, "app_scr_class8", ID_WINDOW_0, 0, 0, 256, 64, 0, 0x0, 0},
+  {WINDOW_CreateIndirect, "app_scr_class10", ID_WINDOW_0, 0, 0, 256, 64, 0, 0x0, 0},
   
 };
 static int g_home_left_time;
@@ -57,20 +57,34 @@ static int g_home_left_time;
 *
 ***********************************************************************/
 
-static void put_message(uint8_t infusion_speed)
+static void put_message(double firstdose , double regulardose ,  uint8_t internaltime,uint8_t presstimes,uint8_t unit)
 {
-//	char *p;
-//	p = get_dynamic_string(kStrDynamic3);
-//	sprintf(p, "%d", infusion_speed);	
-//	strcat(p, "ml/hr");
-//	TEXT_SetText(WM_GetDialogItem(g_ui_common_param.win_id, INFUSION_ID_STR_SPEED), p);
-//
-//	hWin = WM_GetDialogItem(ui_get_current_hwin(), MessageID);
-//	//sprintf(buff, "%s", get_string(kStrWhetherToStopInfuse));
-//	sprintf(p, "%d", infusion_speed);	
-//	TEXT_SetText(hWin, get_string(kStrWhetherToContinueInfuse));		
-
-
+	char *p;
+        const char *ptr;
+        WM_HWIN hWin;
+        
+        hWin = WM_GetDialogItem(ui_get_current_hwin(), MessageID);
+		if(unit == 0)
+		{
+			ptr = get_string(kStrPCAUI_mL);
+		}
+		else if(unit == 1)
+		{
+			ptr = get_string(kStrPCAUI_mg);
+		}
+		else if(unit == 2)
+		{
+			ptr = get_string(kStrPCAUI_mcg);
+		}
+		else   //默认为mL
+			{
+			ptr = get_string(kStrPCAUI_mL);
+			}
+		
+        p = get_dynamic_string(kStrDynamic3);
+        sprintf(p, ptr, firstdose,regulardose,internaltime,presstimes);
+      
+        TEXT_SetText(hWin, p);     
 }
 
 static void _cbDialog(WM_MESSAGE * pMsg)
@@ -91,14 +105,10 @@ static void _cbDialog(WM_MESSAGE * pMsg)
 		case WM_INIT_DIALOG:
 			WINDOW_SetBkColor(pMsg->hWin, GUI_BLACK);
 
-			GUI_SetFont(get_font(14));
-			ptr = get_string(kStrBKGDUI);
-			strlen = GUI_GetStringDistX(ptr);
+			GUI_SetFont(get_font(14));     
                         
-			sprintf(p, ptr, 10000.1,223,486);
-                        
-			hWin = TEXT_CreateEx(40, 7, 200, 40, pMsg->hWin, 
-				                 WM_CF_SHOW, GUI_TA_VCENTER|GUI_TA_HCENTER, MessageID, p);
+			hWin = TEXT_CreateEx(0, 3, 255, 43, pMsg->hWin, 
+				                 WM_CF_SHOW, GUI_TA_VCENTER|GUI_TA_HCENTER, MessageID, 0);
 			TEXT_SetFont(hWin, get_font(14));
 			TEXT_SetBkColor(hWin,GUI_BLACK );
 			TEXT_SetTextColor(hWin, GUI_WHITE);
@@ -133,7 +143,7 @@ static void _cbDialog(WM_MESSAGE * pMsg)
 *       Public code
 *
 ***********************************************************************/
-WM_HWIN app_scr_class8_create(type_MsgBody4UICtrlMsg *msg) 
+WM_HWIN app_scr_class10_create(type_MsgBody4UICtrlMsg *msg) 
 {
 	WM_HWIN hWin;
 
@@ -143,16 +153,33 @@ WM_HWIN app_scr_class8_create(type_MsgBody4UICtrlMsg *msg)
 }
 
 
-int app_scr_class8_update(WM_HWIN hwin, type_MsgBody4UICtrlMsg *msg)
+int app_scr_class10_update(WM_HWIN hwin, type_MsgBody4UICtrlMsg *msg)
 {
-	//g_home_left_time = msg->SItem.DataValArray[4];
-	//put_infusion_state(msg->SItem.DataValArray[5]);
-	//put_infusion_dose(msg->SItem.DataValArray[6], msg->SItem.DataValArray[7]);
-	//put_infusion_seed(msg->SItem.DataValArray[8]);
+	double firstdose ;
+	double regulardose ;
+	double internaltime;
+	uint8_t presstimes;
+	uint8_t unit;
+
+	firstdose = 	msg->SItem.DataValArray[1]*1000 	+
+			msg->SItem.DataValArray[2]*100 		+
+			msg->SItem.DataValArray[3]*10 		+
+			msg->SItem.DataValArray[4]			+
+			msg->SItem.DataValArray[5]*0.1		;
+
+	regulardose= msg->SItem.DataValArray[6]*1000 	+
+			msg->SItem.DataValArray[7]*100 		+
+			msg->SItem.DataValArray[8]*10 		+
+			msg->SItem.DataValArray[9]			+
+			msg->SItem.DataValArray[10]*0.1		;
+
+
+	put_message(firstdose,regulardose,msg->SItem.DataValArray[11],msg->SItem.DataValArray[16],msg->SItem.DataValArray[21]);
+	
  	return 0;	
 }
 
-void app_scr_class8_destroy(WM_HWIN win_id) 
+void app_scr_class10_destroy(WM_HWIN win_id) 
 {
 	GUI_EndDialog(win_id, 0);
 }

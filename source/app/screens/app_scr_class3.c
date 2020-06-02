@@ -44,12 +44,19 @@
 #define INFUSION_ID_STR_SPEED	(GUI_ID_USER + 0x04)
 #define INFUSION_ID_STR_TIME	(GUI_ID_USER + 0x05)
 #define INFUSION_ID_STR_HR		(GUI_ID_USER + 0x06)
+#define BATTERY_LEVEL_ID		(GUI_ID_USER + 0x07)
+#define TIME_ID					(GUI_ID_USER + 0x08)
+#define LEFT_TIME_ID  			(GUI_ID_USER + 0x09)
+#define LEFT_TIME_UINT_ID		(GUI_ID_USER + 0x0A)
+#define LOCK_STATE				(GUI_ID_USER + 0x0B)
 
 
 //infusion state
-#define INFUSION_STATE_IDLE		0
-#define INFUSION_STATE_RUN		1
-#define INFUSION_STATE_PAUSE	2
+
+#define INFUSION_STATE_PAUSE	0
+#define INFUSION_STATE_NOSTART	1
+#define INFUSION_STATE_FINISH	2
+#define INFUSION_STATE_RUN		3
 
 
 /*********************************************************************
@@ -58,39 +65,34 @@
 *
 ***********************************************************************/
 static const GUI_WIDGET_CREATE_INFO _aDialogCreate[] = {
-  {WINDOW_CreateIndirect, "app_home_02000", ID_WINDOW_0, 0, 0, 256, 64, 0, 0x0, 0},
+  {WINDOW_CreateIndirect, "app_scr_class3", ID_WINDOW_0, 0, 0, 256, 64, 0, 0x0, 0},
   
 };
-static int g_home_left_time;
+//static int g_home_left_time;
 /*********************************************************************
 *
 *       Static code
 *
 ***********************************************************************/
-static void put_left_time(uint16_t time)
+static void put_left_time(uint8_t time,uint8_t time_uint)
 {
 	GUI_RECT rect;
 	int dlen, hlen;
-	char *p;
-
+	char *ptrr;
 	int x;
-	
-	GUI_SetFont(get_font(88));
-	p = get_dynamic_string(kStrDynamic1);
-	sprintf(p, "%d", time);
-	dlen = GUI_GetStringDistX(p);
+        WM_HWIN hWin;
+	//剩余时间
+	hWin = WM_GetDialogItem(ui_get_current_hwin(), LEFT_TIME_ID);
+	sprintf(ptrr, "%d", time);
+	TEXT_SetText(hWin, ptrr);
 
-	GUI_SetFont(get_font(14));
-	hlen = GUI_GetStringDistX(get_string(kStrHour));
-	x = ((DISPLAY_WIDTH/2 + 24) - (dlen + hlen))/2;
-	//data
-	GUI_SetFont(get_font(88));
-	ui_rect_init_by_size(rect, x, 0, dlen, DISPLAY_HEIGHT);
-	GUI_DispStringInRect(p, &rect, GUI_TA_VCENTER|GUI_TA_HCENTER);	
-	//hr
-	GUI_SetFont(get_font(14));
-	ui_rect_init_by_size(rect, x+dlen, 48, hlen, 16);
-	GUI_DispStringInRect(get_string(kStrHour), &rect, GUI_TA_VCENTER|GUI_TA_HCENTER);
+	//时间单位
+	hWin = WM_GetDialogItem(ui_get_current_hwin(), LEFT_TIME_UINT_ID);
+	if( time_uint == 1 )
+		TEXT_SetText(hWin, "min");
+	else if( time_uint == 0 )
+		TEXT_SetText(hWin, "hr");
+	
 }
 
 
@@ -102,20 +104,23 @@ static void put_infusion_state(uint8_t state)
 	
 	switch(state)
 	{
-		case INFUSION_STATE_IDLE:
-			bitmap = get_image(kImgInfusionStop);
-			ptr = get_string(kStrInfusionStop);
-			break;
-
-		case INFUSION_STATE_RUN:
-			bitmap = get_image(kImgInfusionRun);
-			ptr = get_string(kStrInfusing);
-
-			break;
-
 		case INFUSION_STATE_PAUSE:
 			bitmap = get_image(kImgInfusionPause);
 			ptr = get_string(kStrInfusionPause);
+			break;
+
+		case INFUSION_STATE_NOSTART:
+			bitmap = get_image(kImgInfusionStop);
+			ptr = get_string(kStrInfusionStop);
+			break;	
+		case INFUSION_STATE_FINISH:
+			bitmap = get_image(kImgInfusionStop);
+			ptr = get_string(kStrInfusionStop);
+			break;
+			
+		case INFUSION_STATE_RUN:
+			bitmap = get_image(kImgInfusionRun);
+			ptr = get_string(kStrInfusing);
 			break;
 
 		default:
@@ -138,13 +143,77 @@ static void put_infusion_dose(uint8_t total_dose, uint8_t infusioned_dose)
 	TEXT_SetText(WM_GetDialogItem(g_ui_common_param.win_id, INFUSION_ID_STR_DOSE), p);
 }
 
-static void put_infusion_seed(uint8_t infusion_speed)
+static void put_infusion_speed(uint8_t infusion_speed,uint8_t speed_unit)
 {
 	char *p;
 	p = get_dynamic_string(kStrDynamic3);
 	sprintf(p, "%d", infusion_speed);	
-	strcat(p, "ml/hr");
+
+	if( speed_unit== 0)
+		strcat(p, "ug/hr");
+	else if(speed_unit==1)
+		strcat(p, "ml/hr");
 	TEXT_SetText(WM_GetDialogItem(g_ui_common_param.win_id, INFUSION_ID_STR_SPEED), p);
+}
+
+static void put_time(uint8_t hour,uint8_t min)
+{
+	char *p;
+	p = get_dynamic_string(kStrDynamic3);
+	sprintf(p, "%02d:%02d", hour,min);	
+
+	TEXT_SetText(WM_GetDialogItem(g_ui_common_param.win_id, TIME_ID), p);
+}
+
+static void put_battery_level(uint8_t level)
+{
+	const GUI_BITMAP *bitmap;
+	const char *ptr;
+
+	switch(level)
+	{
+	case 0:
+		bitmap = get_image(kImgBatteryEmpty);
+		break;
+
+	case 1:
+		bitmap = get_image(kImgBatteryOne);
+		break;
+
+	case 2:
+		bitmap = get_image(kImgBatteryTwo);
+		break;
+
+	case 3:
+		bitmap = get_image(kImgBatteryThree);
+		break;
+
+	case 4:
+		bitmap = get_image(kImgBatteryFull);
+		break;
+        }
+        
+    IMAGE_SetBitmap(WM_GetDialogItem(g_ui_common_param.win_id, BATTERY_LEVEL_ID), bitmap);
+}
+
+static void put_lock_state(uint8_t state)
+{
+	const GUI_BITMAP *bitmap;
+	WM_HWIN hWin;
+	hWin = WM_GetDialogItem(ui_get_current_hwin(), LOCK_STATE);
+
+	if( state == 0 )
+        {
+		bitmap = get_image(kImgLock);
+                WM_ShowWindow(hWin);	
+        }
+	else if(state == 1)
+		{
+			//bitmap = get_image(kImgsetmenu_version);
+			WM_HideWindow(hWin);	
+		}
+
+	IMAGE_SetBitmap(hWin, bitmap);
 }
 
 static void _cbDialog(WM_MESSAGE * pMsg)
@@ -163,14 +232,14 @@ static void _cbDialog(WM_MESSAGE * pMsg)
 		case WM_INIT_DIALOG:
 			WINDOW_SetBkColor(pMsg->hWin, GUI_BLACK);
 			//state string
-			hWin = TEXT_CreateEx(DISPLAY_WIDTH/2+24, 12, DISPLAY_WIDTH/2 - 24, 16, pMsg->hWin, 
+			hWin = TEXT_CreateEx(DISPLAY_WIDTH/2+24, 14, DISPLAY_WIDTH/2 - 24, 16, pMsg->hWin, 
 				                 WM_CF_SHOW, GUI_TA_VCENTER|GUI_TA_RIGHT,  INFUSION_ID_STR_STATE, get_string(kStrInfusing));
 			TEXT_SetFont(hWin, get_font(14));
 			TEXT_SetBkColor(hWin, GUI_WHITE);
 			TEXT_SetTextColor(hWin, GUI_BLACK);
 
 			//state image
-			hWin = IMAGE_CreateEx(DISPLAY_WIDTH/2+24, 12, 16, 16, pMsg->hWin, WM_CF_SHOW,  IMAGE_CF_AUTOSIZE, INFUSION_ID_IMG_STATE);
+			hWin = IMAGE_CreateEx(DISPLAY_WIDTH/2+24, 14, 16, 16, pMsg->hWin, WM_CF_SHOW,  IMAGE_CF_AUTOSIZE, INFUSION_ID_IMG_STATE);
 			IMAGE_SetBitmap(hWin, get_image(kImgInfusionRun));
 			
 			//dose
@@ -193,6 +262,35 @@ static void _cbDialog(WM_MESSAGE * pMsg)
 			TEXT_SetBkColor(hWin, GUI_BLACK);
 			TEXT_SetTextColor(hWin, GUI_WHITE);
 
+			//time 
+			hWin = TEXT_CreateEx(DISPLAY_WIDTH-34-GUI_GetStringDistX("08:30")-5, 0, GUI_GetStringDistX("08:30"), 13, pMsg->hWin, 
+				                 WM_CF_SHOW, GUI_TA_VCENTER|GUI_TA_LEFT,  TIME_ID, "08:30");
+			TEXT_SetFont(hWin, get_font(14));
+			TEXT_SetBkColor(hWin, GUI_BLACK);
+			TEXT_SetTextColor(hWin, GUI_WHITE);
+
+			//剩余电量
+			hWin = IMAGE_CreateEx(222, 2, 33, 14, pMsg->hWin, WM_CF_SHOW,  IMAGE_CF_AUTOSIZE, BATTERY_LEVEL_ID);
+			IMAGE_SetBitmap(hWin, get_image(kImgBatteryFull));
+
+			//left time 
+			hWin = TEXT_CreateEx(0, 0, 130, 64, pMsg->hWin, 
+				                 WM_CF_SHOW, GUI_TA_VCENTER|TEXT_CF_HCENTER,  LEFT_TIME_ID, "255");
+			TEXT_SetFont(hWin, get_font(88));
+			TEXT_SetBkColor(hWin, GUI_BLACK);
+			TEXT_SetTextColor(hWin, GUI_WHITE);
+
+			//left time uint
+			hWin = TEXT_CreateEx(130, 50, GUI_GetStringDistX("min"), 12, pMsg->hWin, 
+				                 WM_CF_SHOW, GUI_TA_VCENTER|GUI_TA_LEFT,  LEFT_TIME_UINT_ID, "hr");
+			TEXT_SetFont(hWin, get_font(14));
+			TEXT_SetBkColor(hWin, GUI_BLACK);
+			TEXT_SetTextColor(hWin, GUI_WHITE);
+
+			//lock state
+			hWin = IMAGE_CreateEx(DISPLAY_WIDTH/2+24, 1, 16, 12, pMsg->hWin, WM_CF_SHOW,  IMAGE_CF_AUTOSIZE, LOCK_STATE);
+			IMAGE_SetBitmap(hWin, get_image(kImgLock));
+
 			break;
 	
 		case WM_PAINT:
@@ -207,7 +305,7 @@ static void _cbDialog(WM_MESSAGE * pMsg)
 			ui_rect_init_by_size(rect, DISPLAY_WIDTH/2+24, 48, len, 16);
 			GUI_DispStringInRect(p, &rect, GUI_TA_VCENTER|GUI_TA_BOTTOM);
 				
-			put_left_time(g_home_left_time);
+			//put_left_time(g_home_left_time);
 			break; 
 			
 		default:
@@ -233,10 +331,27 @@ WM_HWIN app_scr_class3_create(type_MsgBody4UICtrlMsg *msg)
 
 int app_scr_class3_update(WM_HWIN hwin, type_MsgBody4UICtrlMsg *msg)
 {
-	g_home_left_time = msg->SItem.DataValArray[4];
-	put_infusion_state(msg->SItem.DataValArray[5]);
-	put_infusion_dose(msg->SItem.DataValArray[6], msg->SItem.DataValArray[7]);
-	put_infusion_seed(msg->SItem.DataValArray[8]);
+	//设置时间
+	put_time(msg->SItem.DataValArray[3],msg->SItem.DataValArray[2]);
+
+	//设置电量
+	put_battery_level(msg->SItem.DataValArray[1]);
+
+	//设置锁屏状态
+	put_lock_state(msg->SItem.DataValArray[11]);
+
+	//剩余时间
+	put_left_time(msg->SItem.DataValArray[5],msg->SItem.DataValArray[4]);
+
+	//输液状态设置
+	put_infusion_state(msg->SItem.DataValArray[6]);
+
+	//输液剂量
+	put_infusion_dose(msg->SItem.DataValArray[7], msg->SItem.DataValArray[8]);
+
+	//输液速度
+	put_infusion_speed(msg->SItem.DataValArray[9],msg->SItem.DataValArray[10]);
+	
  	return 0;	
 }
 

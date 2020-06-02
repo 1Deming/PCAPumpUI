@@ -191,10 +191,15 @@ typedef enum
 	kStrpressselectkey,		//是按确认键
 	kStrstartedit,  		//进入编辑
 	kStredit,				//编辑
-	kStrBKGDUI,				//速度:%4.1f mL/hr 总量:%3d mL\nKVO速度:%3d mL/hr
+	kStrBKGDUI_mL,			//速度:%4.1f mL/hr 总量:%4.1f mL\nKVO速度:%4.1f mL/hr
+	kStrBKGDUI_mg,			//速度:%4.1f mg/hr 总量:%4.1f mg\nKVO速度:%4.1f mg/hr
+	kStrBKGDUI_mcg,			//速度:%4.1f mcg/hr 总量:%4.1f mcg\nKVO速度:%4.1f mcg/hr
 	kStrrate,				//速度
 	kStrvolume,				//总量
-	kStrPCAUI,  			//PCA首次量/常规量/间隔时间\n小时允许数:%4.1f mL/\n%4.1f mL/%3d min/%3d次
+	kStrKvovolume,			//Kvo总量
+	kStrPCAUI_mL,  			//PCA首次量/常规量/间隔时间\n小时允许数:%4.1f mL/\n%4.1f mL/%3d min/%3d次
+	kStrPCAUI_mg,  			//PCA首次量/常规量/间隔时间\n小时允许数:%4.1f mL/\n%4.1f mL/%3d min/%3d次
+	kStrPCAUI_mcg,  		//PCA首次量/常规量/间隔时间\n小时允许数:%4.1f mL/\n%4.1f mL/%3d min/%3d次
 	kStrPCAfirstdose,		//PCA首次量
 	kStrregulardose,  		//常规量
 	kStrinternaltime,		//间隔时间
@@ -204,9 +209,13 @@ typedef enum
 	kStrworktime,  			//工作时间
 	kStrbreaktime,  		//休息时间
 	kStrConcentrationSet,  	//浓度设置
+	kStrChangePasswordOk,  	//密码更改生效
+	kStrUnlockfail,  	//解锁失败
+	kStrPowerOffOnCheck,  	//按确认键关机\n按返回键取消
+	kStrStopAlarming,		//停止报警
+	kStrSetPassword,		//设置密码
+	kStrDoseUnit,			//输注量单位
 	
-
-
 	DYNAMIC_STRING_ID_DEFINE,	
 	kStrIDMax
 }StrID;
