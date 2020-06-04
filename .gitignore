@@ -22,3 +22,7 @@
 /build/IAR/Debug/
 /build/IAR/Test/
 /test/
+
+*.dep
+*.ewp
+*.ewt
