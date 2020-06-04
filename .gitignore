@@ -1,0 +1,24 @@
+# IAR Settings 
+/build/IAR/settings/*.crun 
+/build/IAR/settings/*.dbgdt 
+/build/IAR/settings/*.cspy 
+/build/IAR/settings/*.cspy.* 
+/build/IAR/settings/*.xcl 
+/build/IAR/settings/*.dni 
+/build/IAR/settings/*.wsdt 
+/build/IAR/settings/*.wspos 
+
+# IAR Debug Exe 
+**/Exe/*.sim 
+
+# IAR Debug Obj 
+**/Obj/*.pbd 
+**/Obj/*.pbd.* 
+**/Obj/*.pbi 
+**/Obj/*.pbi.* 
+
+#IAR编译生成的文件
+/build/IAR/Release/
+/build/IAR/Debug/
+/build/IAR/Test/
+/test/

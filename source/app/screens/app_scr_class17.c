@@ -25,7 +25,7 @@
 #include "string_data.h"
 #include "font_data.h"
 #include <stdbool.h>
-#include "app_scr_histroy_15100.h"
+#include "app_scr_class17.h"
 #include <stdio.h>
 #include "ssz_common.h"
 #include "widget_text.h"
@@ -63,7 +63,7 @@ typedef struct{
 
 
 static const GUI_WIDGET_CREATE_INFO _aDialogCreate[] = {
-  { WINDOW_CreateIndirect, "app_scr_histroy_15100", ID_WINDOW_0, 0, 0, 256, 64, 0, 0x0, 0 },
+  { WINDOW_CreateIndirect, "app_scr_class17", ID_WINDOW_0, 0, 0, 256, 64, 0, 0x0, 0 },
 };
 
 /*********************************************************************
@@ -95,7 +95,7 @@ static void put_histroy_title_and_item(const LogOneRecord* one_record)
 		         record_log_to_str(one_record, show_text, ssz_array_size(show_text)));
 }
 
-static void put_message(type_MsgBody4UICtrlMsg *msg)
+static void push_message(type_MsgBody4UICtrlMsg *msg)
 {
   uint16_t seriesID ;
   uint16_t seriesIDall;

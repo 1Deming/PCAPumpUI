@@ -1,0 +1,15 @@
+{
+    "files.exclude": {
+    "bsp/bsp_machine/Drivers/*": true,
+    "bsp/bsp_machine/EWARM/*": true,
+    "build/*":true,
+    "test/*":true,
+
+
+
+
+
+
+
+    }
+}
