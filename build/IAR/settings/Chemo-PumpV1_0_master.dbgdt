@@ -1537,7 +1537,7 @@
             <IarPane-34104>
                 <expressions>
                     <item>hWin</item>
-                    <item></item>
+                    <item />
                 </expressions>
                 <col-names>
                     <item>Expression</item>

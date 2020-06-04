@@ -15,7 +15,8 @@
 *                                                                    *
 *        Internet: www.segger.com  Support: support@segger.com       *
 *                                                                    *
-***********************************************************************/
+**********************************************************************/
+
 
 #include "DIALOG.h"
 #include "GUI.h"
@@ -24,11 +25,15 @@
 #include "string_data.h"
 #include "font_data.h"
 #include <stdbool.h>
-#include "app_scr_class9.h"
+#include "app_scr_histroy_15100.h"
 #include <stdio.h>
 #include "ssz_common.h"
 #include "widget_text.h"
 #include "widget_image.h"
+#include "record_log_config.h"
+#include "ert_RTC.h"
+#include "param.h"
+#include "record_log_text.h"
 
 
 /*********************************************************************
@@ -36,121 +41,145 @@
 *       Defines
 *
 ***********************************************************************/
-#define ID_WINDOW_0     (GUI_ID_USER + 0x00)
+#define ID_WINDOW_0     	(GUI_ID_USER + 0x00)
 
-#define MessageID1	(GUI_ID_USER + 0x01)
-#define MessageID2	(GUI_ID_USER + 0x02)
-#define MessageID3	(GUI_ID_USER + 0x03)
+#define HISTROY_ID_TITLE	(GUI_ID_USER + 0x01)
+#define HISTROY_ID_ITEM		(GUI_ID_USER + 0x02)
+#define HISTROY_ID_INDEX	(GUI_ID_USER + 0x03)
 
+typedef struct{
+	int value;
+	StrID str_id;
+}StrIntItem;
+
+#define LOG_TEXT_MAX_SIZE 128
+#define LOG_VAR_TEXT_MAX_SIZE 40
 
 /*********************************************************************
 *
 *       Static data
 *
-***********************************************************************/
+**********************************************************************/
+
+
 static const GUI_WIDGET_CREATE_INFO _aDialogCreate[] = {
-  {WINDOW_CreateIndirect, "app_scr_class8", ID_WINDOW_0, 0, 0, 256, 64, 0, 0x0, 0},
-  
+  { WINDOW_CreateIndirect, "app_scr_histroy_15100", ID_WINDOW_0, 0, 0, 256, 64, 0, 0x0, 0 },
 };
-static int g_home_left_time;
+
 /*********************************************************************
 *
 *       Static code
 *
 ***********************************************************************/
 
-static void put_message(uint8_t infusion_speed)
+static void put_histroy_index(int cur_index, int total_index)
 {
-//	char *p;
-//	p = get_dynamic_string(kStrDynamic3);
-//	sprintf(p, "%d", infusion_speed);	
-//	strcat(p, "ml/hr");
-//	TEXT_SetText(WM_GetDialogItem(g_ui_common_param.win_id, INFUSION_ID_STR_SPEED), p);
-//
-//	hWin = WM_GetDialogItem(ui_get_current_hwin(), MessageID);
-//	//sprintf(buff, "%s", get_string(kStrWhetherToStopInfuse));
-//	sprintf(p, "%d", infusion_speed);	
-//	TEXT_SetText(hWin, get_string(kStrWhetherToContinueInfuse));		
-
-
+	char *p;
+	p = get_dynamic_string(kStrDynamic1);
+	sprintf(p, "%d/%d", cur_index, total_index);
+	TEXT_SetText(WM_GetDialogItem(ui_get_current_hwin(), HISTROY_ID_INDEX), p);
 }
 
-static void _cbDialog(WM_MESSAGE * pMsg)
+static void put_histroy_title_and_item(const LogOneRecord* one_record)
+{
+	char show_text[128];
+	char *p;
+	SszDateTime tim;
+	
+	p = get_dynamic_string(kStrDynamic2);
+	//ssz_seconds_to_time(one_rec.occur_time, &tim);
+	//sprintf(p, "%s %d-%d-%d", log_event_type_to_const_str(log_type), tim.year+2000,tim.month, tim.day);
+	TEXT_SetText(WM_GetDialogItem(ui_get_current_hwin(), HISTROY_ID_TITLE), p);	
+
+	TEXT_SetText(WM_GetDialogItem(ui_get_current_hwin(), HISTROY_ID_ITEM), 
+		         record_log_to_str(one_record, show_text, ssz_array_size(show_text)));
+}
+
+static void put_message(type_MsgBody4UICtrlMsg *msg)
+{
+  uint16_t seriesID ;
+  uint16_t seriesIDall;
+  char p[50];
+  
+  seriesID = msg->SItem.DataValArray[48] * 10 + msg->SItem.DataValArray[49] ;
+  seriesIDall = msg->SItem.DataValArray[50] * 10 + msg->SItem.DataValArray[51] ;
+  
+  sprintf(p,"%03d/%03d",seriesID,seriesIDall);
+  TEXT_SetText(WM_GetDialogItem(ui_get_current_hwin(), HISTROY_ID_INDEX), p);	
+
+  
+}
+
+
+static void _cbDialog(WM_MESSAGE * pMsg) 
 {
 	GUI_RECT rect;
 	WM_HWIN hWin;
-	int len;
+	int strlen, x;
 	const char *ptr;
-        char *p;
-        uint8_t strlen;
-        
+
+	GUI_SetFont(get_font(14));
+	ptr = "1000/1000";
+	strlen = GUI_GetStringDistX(ptr);
+	x = (DISPLAY_WIDTH - strlen)/2;
+	
 	switch (pMsg->MsgId) 
 	{
-		case WM_CREATE:
-			
-			break;
-			
 		case WM_INIT_DIALOG:
 			WINDOW_SetBkColor(pMsg->hWin, GUI_BLACK);
-
-			GUI_SetFont(get_font(14));
-			ptr = get_string(kStrBKGDUI);
-			strlen = GUI_GetStringDistX(ptr);              
-			hWin = TEXT_CreateEx(6, 6, strlen, 14, pMsg->hWin, 
-				                 WM_CF_SHOW, GUI_TA_VCENTER|GUI_TA_HCENTER, MessageID1, p);
+			//tile
+			hWin = TEXT_CreateEx(0, 0, DISPLAY_WIDTH/2, 12, pMsg->hWin, 
+				                 WM_CF_SHOW, GUI_TA_VCENTER|GUI_TA_LEFT,  HISTROY_ID_TITLE, get_string(kStrLogEventAlarm));
 			TEXT_SetFont(hWin, get_font(14));
-			TEXT_SetBkColor(hWin,GUI_BLACK );
+			TEXT_SetBkColor(hWin, GUI_BLACK);
 			TEXT_SetTextColor(hWin, GUI_WHITE);
-			WM_BringToTop(hWin);
 
 			
-			strlen = GUI_GetStringDistX("1/3");                                               
-			hWin = TEXT_CreateEx(220, 6, strlen, 14, pMsg->hWin, 
-				                 WM_CF_SHOW, GUI_TA_VCENTER|GUI_TA_HCENTER, MessageID2, 0);
+			//item
+			hWin = TEXT_CreateEx(0, 16, DISPLAY_WIDTH, DISPLAY_HEIGHT-28, pMsg->hWin, 
+				                 WM_CF_SHOW, GUI_TA_LEFT,  HISTROY_ID_ITEM, get_string(kStrLogEventInfusionStart));
 			TEXT_SetFont(hWin, get_font(14));
-			TEXT_SetBkColor(hWin,GUI_BLACK );
+			TEXT_SetBkColor(hWin, GUI_BLACK);
 			TEXT_SetTextColor(hWin, GUI_WHITE);
-			WM_BringToTop(hWin);
+			TEXT_SetWrapMode(hWin, GUI_WRAPMODE_CHAR);
 
-
-			strlen = GUI_GetStringDistX("1251.2mL");                                               
-			hWin = TEXT_CreateEx(89, 110, strlen, 14, pMsg->hWin, 
-				                 WM_CF_SHOW, GUI_TA_VCENTER|GUI_TA_HCENTER, MessageID3, 0);
+			//index
+			hWin = TEXT_CreateEx(x, DISPLAY_HEIGHT-16, strlen, 16, pMsg->hWin, 
+				                 WM_CF_SHOW, GUI_TA_VCENTER|GUI_TA_HCENTER,  HISTROY_ID_INDEX, "034/999");
 			TEXT_SetFont(hWin, get_font(14));
-			TEXT_SetBkColor(hWin,GUI_BLACK );
+			TEXT_SetBkColor(hWin, GUI_BLACK);
 			TEXT_SetTextColor(hWin, GUI_WHITE);
-			WM_BringToTop(hWin);
-
 			break;
 	
 		case WM_PAINT:
-			GUI_SetColor(GUI_WHITE);
 			GUI_SetFont(get_font(14));
-				
+
+			ui_rect_init_by_size(rect, x-8, DISPLAY_HEIGHT-16+4, 8, 16);
+			GUI_DrawBitmap(get_image(kImgLeftArrow), rect.x0, rect.y0);
+			
+			ui_rect_init_by_size(rect, x+strlen, DISPLAY_HEIGHT-16+4, 8, 16);
+			GUI_DrawBitmap(get_image(kImgRightArrow), rect.x0, rect.y0);
+			
 			ptr = get_string(kStrReturn);
 			strlen = GUI_GetStringDistX(ptr);
-			ui_rect_init_by_size(rect, 2, 46, strlen, 12);
-			GUI_DispStringInRect(ptr, &rect, GUI_TA_LEFT|GUI_TA_VCENTER);
-
-			ptr = get_string(kStredit);
-			strlen = GUI_GetStringDistX(ptr);
-			ui_rect_init_by_size(rect, 220, 44, strlen, 16);
-			GUI_DispStringInRect(ptr, &rect, GUI_TA_LEFT|GUI_TA_VCENTER);
-			
+			ui_rect_init_by_size(rect, 0, DISPLAY_HEIGHT-16, strlen, 16);
+			GUI_DispStringInRect(ptr, &rect, GUI_TA_LEFT|GUI_TA_BOTTOM);
 			break; 
-		
+			
 		default:
 			  WM_DefaultProc(pMsg);
 			  break;
 	}
+
+
 }
 
 /*********************************************************************
 *
 *       Public code
 *
-***********************************************************************/
-WM_HWIN app_scr_class9_create(type_MsgBody4UICtrlMsg *msg) 
+**********************************************************************/
+WM_HWIN app_scr_class17_create(type_MsgBody4UICtrlMsg *msg) 
 {
 	WM_HWIN hWin;
 
@@ -160,19 +189,18 @@ WM_HWIN app_scr_class9_create(type_MsgBody4UICtrlMsg *msg)
 }
 
 
-int app_scr_class9_update(WM_HWIN hwin, type_MsgBody4UICtrlMsg *msg)
+int app_scr_class17_update(WM_HWIN hwin, type_MsgBody4UICtrlMsg *msg)
 {
-	//g_home_left_time = msg->SItem.DataValArray[4];
-	//put_infusion_state(msg->SItem.DataValArray[5]);
-	//put_infusion_dose(msg->SItem.DataValArray[6], msg->SItem.DataValArray[7]);
-	//put_infusion_seed(msg->SItem.DataValArray[8]);
- 	return 0;	
+
+  push_message(msg);
+ 	
+  return 0;	
 }
 
-void app_scr_class9_destroy(WM_HWIN win_id) 
+void app_scr_class17_destroy(WM_HWIN win_id) 
 {
 	GUI_EndDialog(win_id, 0);
 }
 
-/*************************** End of file ****************************/
 
+/*************************** End of file ****************************/

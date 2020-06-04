@@ -159,8 +159,6 @@ void test(void)
         
         disp_msg.CursorIndex.CursorType = index;
 
-
-
         disp_msg.SItem.DataValArray[5] = index;
         disp_msg.SItem.DataValArray[6] = index;
         disp_msg.SItem.DataValArray[7] = index;
@@ -182,7 +180,7 @@ void test(void)
 //	disp_msg.SItem.DataValArray[7] = 50;
 //	disp_msg.SItem.DataValArray[8] = 120;
 
-	ert_uiDispService(20,disp_msg.UIID, &disp_msg.CursorIndex, &disp_msg.ditem, &disp_msg.SItem);
+	ert_uiDispService(17,disp_msg.UIID, &disp_msg.CursorIndex, &disp_msg.ditem, &disp_msg.SItem);
 }
 
 /***********************************************

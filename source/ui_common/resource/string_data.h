@@ -215,6 +215,10 @@ typedef enum
 	kStrStopAlarming,		//停止报警
 	kStrSetPassword,		//设置密码
 	kStrDoseUnit,			//输注量单位
+	kStrCheckVersion,		//版本号
+	kStrSetUnit,			//单位设置
+	kStrSetTime,			//时间设置
+//	kStrSetPassword,		//密码设置
 	
 	DYNAMIC_STRING_ID_DEFINE,	
 	kStrIDMax
