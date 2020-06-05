@@ -12,7 +12,7 @@
         <ByteLimit>50</ByteLimit>
     </Stack>
     <DebugChecksum>
-        <Checksum>1415314558</Checksum>
+        <Checksum>2020629560</Checksum>
     </DebugChecksum>
     <StLinkDriver>
         <stlinkserialNo>58391543</stlinkserialNo>
@@ -84,10 +84,10 @@
         <JetConnSerialNo>CMSIS-DAP v1:07120001066dff353237485243224637a5a5a5a597969908</JetConnSerialNo>
         <JetConnFoundProbes />
         <PrevWtdReset>Disabled (no reset)</PrevWtdReset>
-        <OnlineReset>Software</OnlineReset>
         <DisableInterrupts>0</DisableInterrupts>
         <LeaveRunning>0</LeaveRunning>
         <MultiCoreRunAll>0</MultiCoreRunAll>
+        <OnlineReset>Software</OnlineReset>
     </Jet>
     <PlDriver>
         <FirstRun>0</FirstRun>
@@ -221,6 +221,14 @@
         <EventLSU>0</EventLSU>
         <EventSLEEP>0</EventSLEEP>
     </SWOTraceWindow>
+    <DisassembleMode>
+        <mode>0</mode>
+    </DisassembleMode>
+    <Breakpoints2>
+        <Bp0>_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\source\app\screens\app_scr_init_screen.c}.60.2" 0 0 1 "" 0 "" 0</Bp0>
+        <Bp1>_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\source\app\app_route.cpp}.239.2" 0 0 1 "" 0 "" 0</Bp1>
+        <Count>2</Count>
+    </Breakpoints2>
     <TermIOLog>
         <LoggingEnabled>_ 0</LoggingEnabled>
         <LogFile>_ ""</LogFile>
@@ -230,15 +238,6 @@
         <LogFile>_ ""</LogFile>
         <Category>_ 0</Category>
     </LogFile>
-    <DisassembleMode>
-        <mode>0</mode>
-    </DisassembleMode>
-    <Breakpoints2>
-        <Bp0>_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\source\app\screens\app_scr_init_screen.c}.60.2" 0 0 1 "" 0 "" 0</Bp0>
-        <Bp1>_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\source\app\app_route.cpp}.239.2" 0 0 1 "" 0 "" 0</Bp1>
-        <Bp2>_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\source\app\screens\app_scr_class9.c}.89.29" 0 0 1 "" 0 "" 0</Bp2>
-        <Count>3</Count>
-    </Breakpoints2>
     <Aliases>
         <A0>_ "F:\zt_1.0\master\bsp\bsp_machine\Drivers\STM32L1xx_HAL_Driver\Src\stm32l1xx_hal.c" ""</A0>
         <A1>_ "F:\zt_1.0\master\bsp\bsp_machine\Drivers\STM32L1xx_HAL_Driver\Src\stm32l1xx_hal_rcc.c" ""</A1>
